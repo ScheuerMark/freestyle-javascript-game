@@ -1,4 +1,4 @@
-.game-field {
+.game-field, .input-numbers {
     width: 630px;
     display: flex;
     flex-wrap: wrap;
@@ -10,4 +10,16 @@
     background-color: blue;
     border: solid black;
     box-sizing: border-box;
+}
+
+.input-numbers .number-field {
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border: solid black;
+    box-sizing: border-box;
+}
+
+.input-numbers .number-field.selected-number {
+    background-color: cadetblue;
 }
