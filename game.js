@@ -10,7 +10,11 @@ function createBoard(width=9) {
 }
 
 function selectInput() {
-    this.classList.toggle('selected-number');
+    if (typeof that !== 'undefined' && this !== that) {
+        that.classList.remove('selected-number');
+    }
+    that = this;
+    that.classList.toggle('selected-number');
 }
 
 function createInput (width=9) {
