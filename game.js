@@ -28,15 +28,22 @@ function createInput (width=9) {
     }
 }
 
-function waitForInput() {
-
+function waitForInput(that) {
+    const inputField = document.getElementsByClassName('selected-number');
+    if (!that.textContent) {
+        that.textContent = inputField[0].textContent;
+        that.classList.add('text-content');
+    } else {
+        that.textContent = '';
+        that.classList.remove('text-content');
+    }
 }
 
 function initClickListener() {
     const fields = document.getElementsByClassName('field');
     for (let field of fields) {
         field.addEventListener('click', function () {
-            waitForInput();
+            waitForInput(this);
         })
     }
 }
