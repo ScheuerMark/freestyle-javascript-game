@@ -1,0 +1,13 @@
+.game-field {
+    width: 630px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game-field .field {
+    width: 70px;
+    height: 70px;
+    background-color: blue;
+    border: solid black;
+    box-sizing: border-box;
+}
