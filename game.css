@@ -2,6 +2,14 @@
     width: 630px;
     display: flex;
     flex-wrap: wrap;
+
+}
+
+.game-field, .input-numbers .number-field {
+    display: flex;
+    justify-content: center;
+    line-height: 70px;
+    font-size: 3em;
 }
 
 .game-field .field {
@@ -10,6 +18,12 @@
     background-color: blue;
     border: solid black;
     box-sizing: border-box;
+}
+
+.game-field .field.text-content {
+    display: flex;
+    justify-content: center;
+    line-height: 70px;
 }
 
 .input-numbers .number-field {
