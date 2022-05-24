@@ -2,31 +2,16 @@
     width: 630px;
     display: flex;
     flex-wrap: wrap;
-
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
 }
 
-.game-field, .input-numbers .number-field {
+.number-field {
     display: flex;
     justify-content: center;
     line-height: 70px;
     font-size: 3em;
-}
-
-.game-field .field {
-    width: 70px;
-    height: 70px;
-    background-color: blue;
-    border: solid black;
-    box-sizing: border-box;
-}
-
-.game-field .field.text-content {
-    display: flex;
-    justify-content: center;
-    line-height: 70px;
-}
-
-.input-numbers .number-field {
     width: 70px;
     height: 70px;
     background-color: transparent;
@@ -34,6 +19,22 @@
     box-sizing: border-box;
 }
 
-.input-numbers .number-field.selected-number {
+.field {
+    width: 70px;
+    height: 70px;
+    background-color: blue;
+    border: solid black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    line-height: 70px;
+    font-size: 3em;
+}
+
+.text-content {
+    color: green;
+}
+
+.number-field.selected-number {
     background-color: cadetblue;
 }
