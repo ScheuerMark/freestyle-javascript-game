@@ -10,11 +10,16 @@ function createBoard(width=9) {
 }
 
 function selectInput() {
-    if (typeof that !== 'undefined' && this !== that) {
-        that.classList.remove('selected-number');
+    const highlightedField = document.getElementsByClassName('highlight');
+    if (!highlightedField.length) {
+        if (typeof that !== 'undefined' && this !== that) {
+            that.classList.remove('selected-number');
+        }
+        that = this;
+        that.classList.toggle('selected-number');
+    } else {
+        that.textContent = this.textContent;
     }
-    that = this;
-    that.classList.toggle('selected-number');
 }
 
 function createInput (width=9) {
@@ -39,24 +44,45 @@ function getDefaultFieldsEditable () {
 function waitForInput() {
     const inputField = document.getElementsByClassName('selected-number');
     const defaultFields = getDefaultFieldsEditable();
-    if (!defaultFields.includes(this)
-    ) {
+    if (!defaultFields.includes(this)) {
         if (inputField.length) {
             if (!this.textContent) {
                 this.textContent = inputField[0].textContent;
                 this.classList.add('text-content');
             } else {
                 if (inputField[0].textContent === this.textContent) {
-                    this.textContent = '';
+                    // this.textContent = ''; // event handler is applied instead
                     this.classList.remove('text-content');
                 } else {
                     this.textContent = inputField[0].textContent;
                 }
             }
         } else {
-            this.textContent = '';
+            // this.textContent = ''; // event handler is applied instead
             this.classList.remove('text-content');
+            const highlightedField = document.getElementsByClassName('highlight');
+            if (!highlightedField.length) {
+                this.classList.add('highlight');
+                that = this
+            } else {
+                if (that === this) {
+                    this.classList.remove('highlight');
+                } else {
+                    that.classList.remove('highlight');
+                    this.classList.add('highlight');
+                    that = this;
+                }
+            }
         }
+    }
+}
+
+function removeTextContent (event) {
+    event.preventDefault();
+    const defaultFields = getDefaultFieldsEditable();
+    if (!defaultFields.includes(this)) {
+        this.textContent = '';
+        this.classList.remove('text-content');
     }
 }
 
@@ -64,6 +90,7 @@ function initClickListener() {
     const fields = document.getElementsByClassName('field');
     for (let field of fields) {
         field.addEventListener('click', waitForInput);
+        field.addEventListener('contextmenu', removeTextContent);
     }
 }
 
