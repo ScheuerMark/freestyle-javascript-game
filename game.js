@@ -28,29 +28,59 @@ function createInput (width=9) {
     }
 }
 
-function waitForInput(that) {
+function getDefaultFieldsEditable () {
+    const defaultFields = [];
+    for (let field of document.getElementsByClassName('default-field')) {
+        defaultFields.push(field);
+    }
+    return defaultFields;
+}
+
+function waitForInput() {
     const inputField = document.getElementsByClassName('selected-number');
-    if (!that.textContent) {
-        that.textContent = inputField[0].textContent;
-        that.classList.add('text-content');
-    } else {
-        that.textContent = '';
-        that.classList.remove('text-content');
+    const defaultFields = getDefaultFieldsEditable();
+    if (!defaultFields.includes(this)
+    ) {
+        if (inputField.length) {
+            if (!this.textContent) {
+                this.textContent = inputField[0].textContent;
+                this.classList.add('text-content');
+            } else {
+                if (inputField[0].textContent === this.textContent) {
+                    this.textContent = '';
+                    this.classList.remove('text-content');
+                } else {
+                    this.textContent = inputField[0].textContent;
+                }
+            }
+        } else {
+            this.textContent = '';
+            this.classList.remove('text-content');
+        }
     }
 }
 
 function initClickListener() {
     const fields = document.getElementsByClassName('field');
     for (let field of fields) {
-        field.addEventListener('click', function () {
-            waitForInput(this);
-        })
+        field.addEventListener('click', waitForInput);
+    }
+}
+
+// For testing purpose
+function  createSomeDefaultField() {
+    const fields = document.getElementsByClassName('field');
+    for (let fieldIndex in fields) {
+        if (fieldIndex < 9) {
+            fields[fieldIndex].classList.add('default-field');
+        }
     }
 }
 
 function initGame() {
     createBoard();
     createInput();
+    createSomeDefaultField() // For testing purpose
     initClickListener();
     // Your game can start here, but define separate functions, don't write everything in here :)
 
