@@ -75,6 +75,7 @@ function waitForInput() {
             }
         }
     }
+    highlightRelatedFields();
 }
 
 function removeTextContent (event) {
@@ -100,6 +101,31 @@ function  createSomeDefaultField() {
     for (let fieldIndex in fields) {
         if (fieldIndex < 9) {
             fields[fieldIndex].classList.add('default-field');
+        }
+    }
+}
+
+function highlightRelatedFields(width=9, field =document.getElementsByClassName("highlight")){
+    let fields = document.getElementsByClassName("field");
+    let highlightedFields = document.querySelectorAll(".field.light-highlight");
+
+    highlightedFields.forEach(field => field.classList.remove("light-highlight"));
+
+    if (field.length > 0){
+        field = field[0];
+        let fieldIndex =Array.from(fields).indexOf(field);
+        let rowIndex = Math.floor(fieldIndex / width);
+        let collIndex = fieldIndex % width;
+        let firstFieldInRow = rowIndex*width;
+        for (let i = firstFieldInRow; i < firstFieldInRow+9; i++){
+            if (fields[i] !== field) {
+                fields[i].classList.add("light-highlight")
+            }
+        }
+        for (let i= 0;i<width*9;i+=width){
+            if (fields[i] !== field) {
+               fields[collIndex+i].classList.add("light-highlight");
+            }
         }
     }
 }
