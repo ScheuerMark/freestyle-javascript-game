@@ -18,7 +18,7 @@ function getRelatedFieldValues(field,fields){
 
 }
 
-function getRelatedFields(field,fields){
+function getRelatedFields(field,fields,width=9){
     let fieldIndex =Array.from(fields).indexOf(field);
     let rowIndex = Math.floor(fieldIndex / width);
     let collIndex = fieldIndex % width;
@@ -28,7 +28,7 @@ function getRelatedFields(field,fields){
 }
 
 function getRow(field,fields,rowIndex,width=9){
-    return document.querySelectorAll(`.field:nth-child(n+${1+rowIndex}):nth-child(-n+${width+rowIndex})`)
+    return document.querySelectorAll(`.field:nth-child(n+${1+(width*rowIndex)}):nth-child(-n+${(rowIndex+1)*9})`)
 }
 
 function getColl(field,fields,collIndex,width=9){
