@@ -23,7 +23,7 @@
     width: 70px;
     height: 70px;
     background-color: blue;
-    border: solid black;
+    border: solid rgba(0,0,0,0.4) 1px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -42,4 +42,22 @@
 .field.highlight {
     background-color: rgba(0, 0, 255, 0.67);
     padding: 5px;
+}
+
+.light-highlight{
+    background-color: rgba(0, 0, 255, 0.8);
+}
+
+.field:nth-child(9n-3), .field:nth-child(9n-6){
+    border-right: solid black 2px;
+}
+.field:nth-child(9n-2), .field:nth-child(9n-5){
+    border-left: solid black 2px;
+}
+.field:nth-child(n+19):nth-child(-n+27),.field:nth-child(n+46):nth-child(-n+54){
+    border-bottom:solid black 2px;
+}
+
+.field:nth-child(n+28):nth-child(-n+36),.field:nth-child(n+55):nth-child(-n+63){
+    border-top:solid black 2px;
 }
