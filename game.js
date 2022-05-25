@@ -144,40 +144,33 @@ function checkIfAllFieldValid(){
 }
 
 function checkIfFieldValid(field,fields){
-    let row = getRow(field,fields);
-    let col = getColl(field,fields);
-    let block= getBlock(field,fields);
+    let fieldValues = getRelatedFieldValues(field,fields);
 
-    let rowValues = Array.from(row).map(item => item.innerHTML);
-    let colValues = Array.from(col).map(item => item.innerHTML);
-    let blockValues = Array.from(block).map(item => item.innerHTML);
-
-    if(rowValues.includes("") || colValues.includes("")){return false};
-    if(new Set(rowValues).size !== rowValues.length || new Set(colValues).size !== colValues.length){return false};
-    return (new Set(blockValues).size === blockValues.length);
+    if(fieldValues.row.includes("") || fieldValues.col.includes("")){return false};
+    if(new Set(fieldValues.row).size !== fieldValues.row.length || new Set(fieldValues.col).size !== fieldValues.col.length){return false};
+    return (new Set(fieldValues.block).size === fieldValues.block.length);
 
 }
 
-function getRow(field,fields,width=9){
+function getRelatedFieldValues(field,fields){
     let fieldIndex =Array.from(fields).indexOf(field);
     let rowIndex = Math.floor(fieldIndex / width);
+    let collIndex = fieldIndex % width;
+    return {row : Array.from(getRow(field,fields,rowIndex)).map(item => item.innerHTML),
+            col : Array.from(getColl(field,fields,collIndex)).map(item => item.innerHTML),
+            block : Array.from(getBlock(field,fields,rowIndex,collIndex)).map(item => item.innerHTML)}
+}
 
+function getRow(field,fields,rowIndex,width=9){
     return document.querySelectorAll(`.field:nth-child(n+${1+rowIndex}):nth-child(-n+${width+rowIndex})`)
 }
 
-function getColl(field,fields,width=9){
-    let fieldIndex =Array.from(fields).indexOf(field);
-    let collIndex = fieldIndex % width;
-
+function getColl(field,fields,collIndex,width=9){
     return document.querySelectorAll(`.field:nth-child(9n-${width-(collIndex+1)})`)
 
 }
 
-function getBlock(field, width=9){
-    let fields = document.getElementsByClassName("field");
-    let fieldIndex =Array.from(fields).indexOf(field);
-    let rowIndex = Math.floor(fieldIndex / width);
-    let collIndex = fieldIndex % width;
+function getBlock(field,fields,rowIndex,collIndex, width=9){
     let boxRowIndex = Math.floor(rowIndex / Math.sqrt(width));
     let boxCollIndex = Math.floor(collIndex / Math.sqrt(width));
 
