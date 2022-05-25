@@ -232,3 +232,15 @@ function emptyCellCoords (startingBoard) {
   }
   return listOfEmptyCells
 }
+
+function showBoard(startingBoard){
+    let fieldsToFill = document.getElementsByClassName("field");
+    for (let i=0; i<fieldsToFill.length; i++){
+        fieldsToFill[i].innerHTML = startingBoard[1].flat()[i];
+        if (fieldsToFill[i].innerHTML === "0"){
+            fieldsToFill[i].innerHTML = "";
+        } else {
+            fieldsToFill[i].classList.add("default-field");
+        }
+    }
+}
