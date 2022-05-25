@@ -51,14 +51,12 @@ function waitForInput() {
                 this.classList.add('text-content');
             } else {
                 if (inputField[0].textContent === this.textContent) {
-                    // this.textContent = ''; // event handler is applied instead
                     this.classList.remove('text-content');
                 } else {
                     this.textContent = inputField[0].textContent;
                 }
             }
         } else {
-            // this.textContent = ''; // event handler is applied instead
             this.classList.remove('text-content');
             const highlightedField = document.getElementsByClassName('highlight');
             if (!highlightedField.length) {
@@ -87,11 +85,24 @@ function removeTextContent (event) {
     }
 }
 
+function keyboardInput (event) {
+    const highlightedField = document.getElementsByClassName('highlight');
+    if (highlightedField.length) {
+        if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+            highlightedField[0].textContent = event.key;
+        } else {
+            highlightedField[0].classList.remove('highlight');
+        }
+    }
+    highlightRelatedFields();
+}
+
 function initClickListener() {
     const fields = document.getElementsByClassName('field');
     for (let field of fields) {
         field.addEventListener('click', waitForInput);
         field.addEventListener('contextmenu', removeTextContent);
+        document.addEventListener('keyup', keyboardInput);
     }
 }
 
