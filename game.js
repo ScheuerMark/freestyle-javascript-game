@@ -153,12 +153,18 @@ function checkIfFieldValid(field,fields){
 }
 
 function getRelatedFieldValues(field,fields){
+    let relatedFields = getRelatedFields(field,fields);
+    return relatedFields.map(item => Array.from(item).map(i => i.innerHTML));
+
+}
+
+function getRelatedFields(field,fields){
     let fieldIndex =Array.from(fields).indexOf(field);
     let rowIndex = Math.floor(fieldIndex / width);
     let collIndex = fieldIndex % width;
-    return {row : Array.from(getRow(field,fields,rowIndex)).map(item => item.innerHTML),
-            col : Array.from(getColl(field,fields,collIndex)).map(item => item.innerHTML),
-            block : Array.from(getBlock(field,fields,rowIndex,collIndex)).map(item => item.innerHTML)}
+    return {row :getRow(field,fields,rowIndex),
+            col : getColl(field,fields,collIndex),
+            block : getBlock(field,fields,rowIndex,collIndex)}
 }
 
 function getRow(field,fields,rowIndex,width=9){
