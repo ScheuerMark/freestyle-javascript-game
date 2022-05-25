@@ -138,6 +138,55 @@ function highlightRelatedFields(width=9, field =document.getElementsByClassName(
     }
 }
 
+function checkIfAllFieldValid(){
+    let fields = document.getElementsByClassName("field");
+    fields.forEach( field => {if(!checkIfFieldValid(field,fields)){return false}});
+}
+
+function checkIfFieldValid(field,fields){
+    let row = getRow(field,fields);
+    let col = getColl(field,fields);
+    let block= getBlock(field,fields);
+
+    let rowValues = Array.from(row).map(item => item.innerHTML);
+    let colValues = Array.from(col).map(item => item.innerHTML);
+    let blockValues = Array.from(block).map(item => item.innerHTML);
+
+    if(rowValues.includes("") || colValues.includes("")){return false};
+    if(new Set(rowValues).size !== rowValues.length || new Set(colValues).size !== colValues.length){return false};
+    return (new Set(blockValues).size === blockValues.length);
+
+}
+
+function getRow(field,fields,width=9){
+    let fieldIndex =Array.from(fields).indexOf(field);
+    let rowIndex = Math.floor(fieldIndex / width);
+
+    return document.querySelectorAll(`.field:nth-child(n+${1+rowIndex}):nth-child(-n+${width+rowIndex})`)
+}
+
+function getColl(field,fields,width=9){
+    let fieldIndex =Array.from(fields).indexOf(field);
+    let collIndex = fieldIndex % width;
+
+    return document.querySelectorAll(`.field:nth-child(9n-${width-(collIndex+1)})`)
+
+}
+
+function getBlock(field, width=9){
+    let fields = document.getElementsByClassName("field");
+    let fieldIndex =Array.from(fields).indexOf(field);
+    let rowIndex = Math.floor(fieldIndex / width);
+    let collIndex = fieldIndex % width;
+    let boxRowIndex = Math.floor(rowIndex / Math.sqrt(width));
+    let boxCollIndex = Math.floor(collIndex / Math.sqrt(width));
+
+    return document.querySelectorAll(`
+                        .field:nth-child(9n+${(boxCollIndex*3+1)+(boxRowIndex*27)}):nth-child(-n+${(boxRowIndex+1)*27}),
+                        .field:nth-child(9n+${boxCollIndex*3+2+(boxRowIndex*27)}):nth-child(-n+${(boxRowIndex+1)*27}),
+                        .field:nth-child(9n+${boxCollIndex*3+3+(boxRowIndex*27)}):nth-child(-n+${(boxRowIndex+1)*27})`)
+}
+
 function initGame() {
     createBoard();
     createInput();
