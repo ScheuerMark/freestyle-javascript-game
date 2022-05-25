@@ -127,6 +127,14 @@ function highlightRelatedFields(width=9, field =document.getElementsByClassName(
                fields[collIndex+i].classList.add("light-highlight");
             }
         }
+
+        let boxRowIndex = Math.floor(rowIndex / Math.sqrt(width));
+        let boxCollIndex = Math.floor(collIndex / Math.sqrt(width));
+        for(let i=0;i<3;i++){
+            for(let j=0;j<3;j++){fields[(((boxCollIndex*3)+i)+((boxRowIndex*3)*9))+(j*9)].classList.add("light-highlight");}
+        }
+        console.log(boxCollIndex);
+        console.log(boxRowIndex);
     }
 }
 
