@@ -111,16 +111,6 @@ function initClickListener() {
     }
 }
 
-// For testing purpose
-function  createSomeDefaultField() {
-    const fields = document.getElementsByClassName('field');
-    for (let fieldIndex in fields) {
-        if (fieldIndex < 9) {
-            fields[fieldIndex].classList.add('default-field');
-        }
-    }
-}
-
 function highlightRelatedFields(width=9){
     let fields = document.getElementsByClassName("field");
     let field =document.getElementsByClassName("highlight")
@@ -142,7 +132,6 @@ function highlightRelatedFields(width=9){
 function initGame() {
     createBoard();
     createInput();
-    // createSomeDefaultField() // For testing purpose
     initClickListener();
     showBoard(newStartingBoard(64));
     // Your game can start here, but define separate functions, don't write everything in here :)
