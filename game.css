@@ -45,7 +45,7 @@
 }
 
 .light-highlight{
-    background-color: rgba(0, 0, 255, 0.8);
+    background-color: rgba(0, 120, 255, 0.99);
 }
 
 .field:nth-child(9n-3), .field:nth-child(9n-6){
