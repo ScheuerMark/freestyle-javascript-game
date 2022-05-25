@@ -1,6 +1,11 @@
 function checkIfAllFieldValid(){
-    let fields = document.getElementsByClassName("field");
-    fields.forEach( field => {if(!checkIfFieldValid(field,fields)){return false}});
+    let fields = Array.from(document.getElementsByClassName("field"));
+    console.log("check");
+    //fields.forEach(field => {if(!checkIfFieldValid(field,fields)){return false;}});
+    for (let field of fields){
+        if(!checkIfFieldValid(field,fields)){return false;}
+    }
+    return true;
 }
 
 function checkIfFieldValid(field,fields){
@@ -14,7 +19,10 @@ function checkIfFieldValid(field,fields){
 
 function getRelatedFieldValues(field,fields){
     let relatedFields = getRelatedFields(field,fields);
-    return relatedFields.map(item => Array.from(item).map(i => i.innerHTML));
+    relatedFields.row = Array.from(relatedFields.row).map(item => item.innerHTML);
+    relatedFields.col = Array.from(relatedFields.col).map(item => item.innerHTML);
+    relatedFields.block = Array.from(relatedFields.block).map(item => item.innerHTML);
+    return relatedFields;
 
 }
 

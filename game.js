@@ -19,6 +19,7 @@ function selectInput() {
         that.classList.toggle('selected-number');
     } else {
         that.textContent = this.textContent;
+        console.log(checkIfAllFieldValid());
     }
 }
 
@@ -55,6 +56,7 @@ function waitForInput() {
                     this.textContent = '';
                 } else {
                     this.textContent = inputField[0].textContent;
+                    console.log(checkIfAllFieldValid());
                 }
             }
         } else {
@@ -73,8 +75,10 @@ function waitForInput() {
                 }
             }
         }
+
+        highlightRelatedFields();
     }
-    highlightRelatedFields();
+
 }
 
 function removeTextContent (event) {
