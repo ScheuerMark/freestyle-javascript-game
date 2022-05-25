@@ -42,7 +42,7 @@ h1{
     justify-content: center;
     line-height: 70px;
     font-size: 3em;
-    color: blue;
+    color: #3131c7;
 }
 
 .text-content {
@@ -74,4 +74,9 @@ h1{
 
 .field:nth-child(n+28):nth-child(-n+36),.field:nth-child(n+55):nth-child(-n+63){
     border-top:solid black 2px;
+}
+
+.default-field{
+    color: black;
+    background-color: whitesmoke;
 }
