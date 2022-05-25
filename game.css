@@ -45,10 +45,6 @@ h1{
     color: #3131c7;
 }
 
-.text-content {
-    /*color: green;*/
-}
-
 .number-field.selected-number {
     background-color: rgba(53, 53, 229, 0.2);
 }

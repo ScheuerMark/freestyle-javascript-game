@@ -49,10 +49,8 @@ function waitForInput() {
         if (inputField.length) {
             if (!this.textContent) {
                 this.textContent = inputField[0].textContent;
-                this.classList.add('text-content');
             } else {
                 if (inputField[0].textContent === this.textContent) {
-                    this.classList.remove('text-content');
                     this.textContent = '';
                 } else {
                     this.textContent = inputField[0].textContent;
@@ -60,7 +58,6 @@ function waitForInput() {
                 }
             }
         } else {
-            this.classList.remove('text-content');
             const highlightedField = document.getElementsByClassName('highlight');
             if (!highlightedField.length) {
                 this.classList.add('highlight');
@@ -86,7 +83,6 @@ function removeTextContent (event) {
     const defaultFields = getDefaultFieldsEditable();
     if (!defaultFields.includes(this)) {
         this.textContent = '';
-        this.classList.remove('text-content');
     }
 }
 
