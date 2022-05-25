@@ -53,6 +53,7 @@ function waitForInput() {
             } else {
                 if (inputField[0].textContent === this.textContent) {
                     this.classList.remove('text-content');
+                    this.textContent = '';
                 } else {
                     this.textContent = inputField[0].textContent;
                     console.log(checkIfAllFieldValid());
