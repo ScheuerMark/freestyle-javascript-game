@@ -35,7 +35,7 @@ h1{
 .field {
     width: 70px;
     height: 70px;
-    background-color: rgba(238,232,170,0.1);
+    background-color: rgba(238, 232, 170, 0.4);
     border: solid rgba(0,0,0,0.4) 1px;
     box-sizing: border-box;
     display: flex;
@@ -50,12 +50,12 @@ h1{
 }
 
 .field.highlight {
-    background-color: rgba(53, 53, 229, 0.2);
+    background-color: rgba(53, 53, 229, 0.2) !important;
     padding: 5px;
 }
 
 .light-highlight{
-    background-color: rgba(245,245,245,0.5);
+    background-color: rgba(238, 232, 170, 1) !important;
 }
 
 .field:nth-child(9n-3), .field:nth-child(9n-6){
