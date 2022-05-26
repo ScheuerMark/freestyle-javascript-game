@@ -49,9 +49,11 @@ function waitForInput() {
         if (inputField.length) {
             if (!this.textContent) {
                 this.textContent = inputField[0].textContent;
+                console.log(checkIfAllFieldValid());
             } else {
                 if (inputField[0].textContent === this.textContent) {
                     this.textContent = '';
+                    console.log(checkIfAllFieldValid());
                 } else {
                     this.textContent = inputField[0].textContent;
                     console.log(checkIfAllFieldValid());
@@ -83,6 +85,7 @@ function removeTextContent (event) {
     const defaultFields = getDefaultFieldsEditable();
     if (!defaultFields.includes(this)) {
         this.textContent = '';
+        console.log(checkIfAllFieldValid());
     }
 }
 
@@ -93,6 +96,7 @@ function keyboardInput (event) {
         console.log(event.code);
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             highlightedField[0].textContent = event.key;
+            console.log(checkIfAllFieldValid());
         } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace'].includes(event.code)) {
            highlightedField[0].textContent = '';
         } else {
@@ -133,7 +137,7 @@ function initGame() {
     createBoard();
     createInput();
     initClickListener();
-    showBoard(newStartingBoard(64));
+    showBoard(newStartingBoard(10));
     // Your game can start here, but define separate functions, don't write everything in here :)
 
 }
