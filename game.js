@@ -161,6 +161,10 @@ function initGame() {
     setDifficulty();
     const startGame = document.getElementById("control1");
     startGame.addEventListener('click', () =>{
+        const winMessagePresent = document.getElementsByClassName('bring-to-front');
+        if (winMessagePresent.length) {
+            winMessagePresent[0].remove();
+        }
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
     })
