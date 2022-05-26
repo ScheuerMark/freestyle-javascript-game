@@ -93,7 +93,6 @@ function keyboardInput (event) {
     const highlightedField = document.getElementsByClassName('highlight');
     const defaultFields = getDefaultFieldsEditable();
     if (highlightedField.length) {
-        console.log(event.code);
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             highlightedField[0].textContent = event.key;
             console.log(checkIfAllFieldValid());
@@ -129,15 +128,21 @@ function highlightRelatedFields(width=9){
     }
 }
 
-
-
-
+function showWinMessage () {
+    const winH1 = document.createElement('h1');
+    winH1.textContent = "You've won!";
+    winH1.classList.add('bring-to-front');
+    document.getElementsByTagName('body')[0].appendChild(winH1);
+}
 
 function initGame() {
     createBoard();
     createInput();
     initClickListener();
     showBoard(newStartingBoard(10));
+    if (checkIfAllFieldValid()) {
+        showWinMessage();
+    }
     // Your game can start here, but define separate functions, don't write everything in here :)
 
 }
