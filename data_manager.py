@@ -3,8 +3,7 @@ from psycopg2 import sql
 
 @database_common.connection_handler
 def add_user(cursor, new_score_form):
-    query = sql.SQL("INSERT INTO sudoku_scores (user_name, user_score, registration_date)  VALUES {user_name}, {user_score},"
-                    "(SELECT NOW()::timestamp(0))").format(sql.Literal(new_score_form['user_name']), sql.Literal(new_score_form['user_score']))
+    query = sql.SQL("INSERT INTO sudoku_scores (user_name, user_score, registration_date)  VALUES ({}, {},(SELECT NOW()::timestamp(0)))").format(sql.Literal(new_score_form['user_name']), sql.Literal(float(new_score_form['user_score'])))
     cursor.execute(query)
 
 

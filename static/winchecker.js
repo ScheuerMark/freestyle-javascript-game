@@ -7,7 +7,10 @@ function checkIfAllFieldValid(){
         if(!checkIfFieldValid(field,fields)){valid = false;}
     }
     if (valid) {
-        showWinMessage();
+        getScore();
+        showWinMessageModal();
+        scoreForm();
+
     }
     return valid;
 }

@@ -98,3 +98,7 @@ h1{
 #minutes, #seconds, #colon {
     font-size: 3em;
 }
+
+#user-name, #user-score {
+    padding: 50px
+}

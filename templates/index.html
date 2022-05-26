@@ -14,26 +14,42 @@
 </head>
 <body>
 
-<div class="modal fade" id="difficultyModal" tabindex="-1" aria-labelledby="setDifficultyModalLabel" aria-hidden="true">
+<div class="modal fade" id="saveScoreModal" tabindex="-1" aria-labelledby="saveScoreModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-centered">
     <div class="modal-content">
-      <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">Choose difficulty level</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <form method="post" id="save-score">
+        <div class="modal-header">
+           <h4 class="modal-title" id="exampleModalLabel">Congratulations!</h4>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <div class="btn-group" role="group">
-                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" data-hole="64" checked data-bs-dismiss="modal">
-                <label class="btn btn-primary" for="option1">Easy</label>
-                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" data-hole="69" data-bs-dismiss="modal">
-                <label class="btn btn-primary" for="option2">Medium</label>
-                <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" data-hole="74" data-bs-dismiss="modal">
-                <label class="btn btn-primary" for="option3">Hard</label>
-                    </div>
+          <div class="mb-3 text-center">
+              <h4>You have won!</h4>
+          <h5>Now you can save your score</h5>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2-form-label" for="user_name">Your name</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" name="user_name" id="username">
+            </div>
+         </div>
+         <div class="mb-3 row">
+            <label class="col-sm-2-form-label" for="user_score">Your score</label>
+            <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" name="user_score" id="userscore" value="42">
+            </div>
+         </div>
       </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="save-form">Save</button>
+      </div>
+        </form>
     </div>
   </div>
 </div>
+
 
 <div class="container mb-5">
     <div class="align-middle"><h1 >Sudoku</h1></div>
@@ -45,25 +61,27 @@
             <div class="card text-center justify-content-center" style="width: 15rem">
                 <div class="card-body">
                     <h3 class="card-title text-align-center">Select difficulty level</h3>
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="difficulty" id="difficulty1" autocomplete="off" checked data-hole="54">
-                      <label class="btn btn-secondary" for="difficulty1">Easy</label>
-                <input type="radio" class="btn-check" name="difficulty" id="difficulty2" autocomplete="off" data-hole="59">
-                      <label class="btn btn-secondary" for="difficulty2">Medium</label>
-                <input type="radio" class="btn-check" name="difficulty" id="difficulty3" autocomplete="off" data-hole="64">
-                      <label class="btn btn-secondary" for="difficulty3">Hard</label>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty1" autocomplete="off" checked data-hole="14">
+                        <label class="btn btn-secondary" for="difficulty1">Easy</label>
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty2" autocomplete="off" data-hole="59">
+                        <label class="btn btn-secondary" for="difficulty2">Medium</label>
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty3" autocomplete="off" data-hole="64">
+                        <label class="btn btn-secondary" for="difficulty3">Hard</label>
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty4" autocomplete="off" data-hole="10">
+                        <label class="btn btn-secondary" for="difficulty4">Demo</label>
                     </div>
                 </div>
             </div>
-             <div class="card text-center " style="width: 15rem">
+            <div class="card text-center " style="width: 15rem">
                 <div class="card-body justify-content-center">
                     <h3 class="card-title text-align-center">Game control</h3>
-                <p>
-                    <input type="radio" class="btn-check" name="control" id="control1" autocomplete="off">
+                    <p>
+                    <input type="button" class="btn-check" name="control" id="control1" autocomplete="off">
                     <label class="btn btn-secondary" id="control11" for="control1">Start game</label></p>
-                <p><input type="radio" class="btn-check" name="control" id="control2" autocomplete="off">
-                <label class="btn btn-secondary" for="control2">Reset game</label></p>
-                <span id="minutes">00</span><span id="colon">:</span><span id="seconds">00</span>
+                    <p><input type="button" class="btn-check" name="control" id="control2" autocomplete="off">
+                    <label class="btn btn-secondary" for="control2">Reset game</label></p>
+                    <span id="minutes">00</span><span id="colon">:</span><span id="seconds">00</span>
                 </div>
 
             </div>
@@ -73,13 +91,30 @@
             <div class="input-numbers"></div>
         </div>
         <div class="col-xs-12 col-md-3 col-lg-2">
-            {% for score in scores %}
-                <div class="card">
-                    <div class="card-top">{{ score.user_name }}</div>
-                    <div class="card-body text-center">{{ score.user_score }}</div>
-                    <div class="card-footer text-end">{{ score.registration_date }}</div>
-                </div>
-            {% endfor %}
+            <div class="card">
+                <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for score in scores %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{ score.user_name }}</td>
+                    <td>{{ score.user_score }}</td>
+                    <td>{{ score.registration_date }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                    </div>
+            </div>
         </div>
     </div>
 </div>

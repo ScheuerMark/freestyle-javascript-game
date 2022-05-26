@@ -11,6 +11,8 @@ def main():
     scores = data_manager.list_scores()
     if request.method == 'POST':
         request_form_new_score = dict(request.form)
+        print(request_form_new_score['user_score'])
+        print(request_form_new_score['user_name'])
         data_manager.add_user(request_form_new_score)
         return render_template("index.html", scores=scores)
     else:

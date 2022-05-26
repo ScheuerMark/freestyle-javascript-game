@@ -143,6 +143,15 @@ function showWinMessage () {
     winH1.classList.add('bring-to-front');
     document.getElementsByTagName('body')[0].appendChild(winH1);
 }
+
+function showWinMessageModal () {
+    const saveScoreModal = new bootstrap.Modal(document.getElementById("saveScoreModal"));
+    const userScore = document.getElementById("userscore");
+    userScore.setAttribute('value', String(getScore()));
+    saveScoreModal.show(saveScoreModal);
+}
+
+
 function setDifficulty() {
     const difficulty = document.querySelectorAll("input[name='difficulty']");
     for (const level of difficulty) {
@@ -157,7 +166,7 @@ function startTimer(){
     if(typeof interval !== "undefined") {
         clearInterval(interval);
     }
-    var sec = 0;
+    sec = 0;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     interval = setInterval( function(){
     document.getElementById("seconds").innerHTML=pad(++sec%60);
@@ -167,14 +176,52 @@ function startTimer(){
 
 }
 
+function getScore(){
+    let score = (sec/60) * holes;
+    console.log(score)
+    return score
+}
+
+function scoreForm() {
+    const saveForm = document.getElementById("save-form");
+    saveForm.addEventListener( "click", function () {
+  function sendData() {
+    const XHR = new XMLHttpRequest();
+
+    // Bind the FormData object and the form element
+    //  const userName = document.getElementById("username");
+    const saveScore = document.getElementById("save-score");
+    const data = new FormData(saveScore);
+
+
+    // Define what happens on successful data submission
+    XHR.addEventListener( "load", function(event) {
+      alert( event.target.responseText );
+    } );
+
+    // Define what happens in case of error
+    XHR.addEventListener( "error", function( event ) {
+      alert( 'Oops! Something went wrong.' );
+    } );
+
+    // Set up our request
+    XHR.open( "POST", '/', true );
+
+    // The data sent is what the user provided in the form
+    XHR.send( data );
+  }
+
+   sendData();
+  } );
+}
 
 function initGame() {
     createBoard();
     createInput();
     initClickListener();
- //   const difficultyModal = new bootstrap.Modal(document.getElementById("difficultyModal"));
+
   //  console.log(difficultyModal);
-   // difficultyModal.show(difficultyModal);
+
     holes = 64;
     setDifficulty();
     const startGame = document.getElementById("control1");
@@ -189,7 +236,6 @@ function initGame() {
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
         startGameLabel.textContent = 'New game';
-        checkIfAllFieldValid();
         checkIfAllFieldValid();
     })
     const resetGame = document.getElementById("control2");
