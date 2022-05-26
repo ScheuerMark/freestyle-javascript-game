@@ -139,14 +139,10 @@ function setDifficulty() {
     const difficulty = document.querySelectorAll("input[name='difficulty']");
     for (const level of difficulty) {
         level.addEventListener('click', function (){
-        console.log("hello2");
         if (this.checked) {
-            console.log("hello3");
             holes = parseInt(this.dataset.hole);
-            console.log(holes);
             }
         });
-        console.log("hello1");
     }
 }
 function startTimer(){
@@ -174,6 +170,7 @@ function initGame() {
     holes = 64;
     setDifficulty();
     const startGame = document.getElementById("control1");
+    const startGameLabel = document.getElementById("control11")
     startGame.addEventListener('click', () =>{
 
         const winMessagePresent = document.getElementsByClassName('bring-to-front');
@@ -183,6 +180,8 @@ function initGame() {
         startTimer();
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
+        startGameLabel.textContent = 'New game';
+        checkIfAllFieldValid();
         checkIfAllFieldValid();
     })
     const resetGame = document.getElementById("control2");
