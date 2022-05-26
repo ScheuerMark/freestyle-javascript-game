@@ -98,6 +98,7 @@ function keyboardInput (event) {
             console.log(checkIfAllFieldValid());
         } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace'].includes(event.code)) {
            highlightedField[0].textContent = '';
+           checkIfAllFieldValid();
         } else {
             highlightedField[0].classList.remove('highlight');
         }
@@ -174,6 +175,7 @@ function initGame() {
     setDifficulty();
     const startGame = document.getElementById("control1");
     startGame.addEventListener('click', () =>{
+
         const winMessagePresent = document.getElementsByClassName('bring-to-front');
         if (winMessagePresent.length) {
             winMessagePresent[0].remove();
@@ -181,10 +183,12 @@ function initGame() {
         startTimer();
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
+        checkIfAllFieldValid();
     })
     const resetGame = document.getElementById("control2");
     resetGame.addEventListener('click', () => {
         showBoard(currentGame);
+        checkIfAllFieldValid();
     })
 }
 
