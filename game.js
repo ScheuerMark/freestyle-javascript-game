@@ -140,9 +140,6 @@ function initGame() {
     createInput();
     initClickListener();
     showBoard(newStartingBoard(10));
-    if (checkIfAllFieldValid()) {
-        showWinMessage();
-    }
     // Your game can start here, but define separate functions, don't write everything in here :)
 
 }

@@ -2,9 +2,12 @@ function checkIfAllFieldValid(){
     let fields = document.getElementsByClassName("field");
     console.log("check");
     //fields.forEach(field => {if(!checkIfFieldValid(field,fields)){return false;}});
-    let valid = false;
+    let valid = true;
     for (const field of fields){
         if(!checkIfFieldValid(field,fields)){valid = false;}
+    }
+    if (valid) {
+        showWinMessage();
     }
     return valid;
 }
