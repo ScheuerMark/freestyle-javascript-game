@@ -13,6 +13,7 @@
     <script src="./game.js" defer></script>
 </head>
 <body>
+
 <div class="modal fade" id="difficultyModal" tabindex="-1" aria-labelledby="setDifficultyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-centered">
     <div class="modal-content">
@@ -62,8 +63,9 @@
                     <label class="btn btn-secondary" for="control1">Start game</label></p>
                 <p><input type="radio" class="btn-check" name="control" id="control2" autocomplete="off">
                 <label class="btn btn-secondary" for="control2">Reset game</label></p>
-
+                <span id="minutes">00</span><span id="colon">:</span><span id="seconds">00</span>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-8 column">

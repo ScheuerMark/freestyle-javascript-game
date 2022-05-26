@@ -98,6 +98,7 @@ function keyboardInput (event) {
             console.log(checkIfAllFieldValid());
         } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace'].includes(event.code)) {
            highlightedField[0].textContent = '';
+           checkIfAllFieldValid();
         } else {
             highlightedField[0].classList.remove('highlight');
         }
@@ -148,6 +149,19 @@ function setDifficulty() {
         console.log("hello1");
     }
 }
+function startTimer(){
+    if(typeof interval !== "undefined") {
+        clearInterval(interval);
+    }
+    var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    interval = setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
+
+
+}
 
 
 function initGame() {
@@ -161,16 +175,20 @@ function initGame() {
     setDifficulty();
     const startGame = document.getElementById("control1");
     startGame.addEventListener('click', () =>{
+
         const winMessagePresent = document.getElementsByClassName('bring-to-front');
         if (winMessagePresent.length) {
             winMessagePresent[0].remove();
         }
+        startTimer();
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
+        checkIfAllFieldValid();
     })
     const resetGame = document.getElementById("control2");
     resetGame.addEventListener('click', () => {
         showBoard(currentGame);
+        checkIfAllFieldValid();
     })
 }
 
