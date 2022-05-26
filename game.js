@@ -49,17 +49,15 @@ function waitForInput() {
         if (inputField.length) {
             if (!this.textContent) {
                 this.textContent = inputField[0].textContent;
-                this.classList.add('text-content');
             } else {
                 if (inputField[0].textContent === this.textContent) {
-                    this.classList.remove('text-content');
+                    this.textContent = '';
                 } else {
                     this.textContent = inputField[0].textContent;
                     console.log(checkIfAllFieldValid());
                 }
             }
         } else {
-            this.classList.remove('text-content');
             const highlightedField = document.getElementsByClassName('highlight');
             if (!highlightedField.length) {
                 this.classList.add('highlight');
@@ -85,7 +83,6 @@ function removeTextContent (event) {
     const defaultFields = getDefaultFieldsEditable();
     if (!defaultFields.includes(this)) {
         this.textContent = '';
-        this.classList.remove('text-content');
     }
 }
 
@@ -110,16 +107,6 @@ function initClickListener() {
     }
 }
 
-// For testing purpose
-function  createSomeDefaultField() {
-    const fields = document.getElementsByClassName('field');
-    for (let fieldIndex in fields) {
-        if (fieldIndex < 9) {
-            fields[fieldIndex].classList.add('default-field');
-        }
-    }
-}
-
 function highlightRelatedFields(width=9){
     let fields = document.getElementsByClassName("field");
     let field =document.getElementsByClassName("highlight")
@@ -141,7 +128,6 @@ function highlightRelatedFields(width=9){
 function initGame() {
     createBoard();
     createInput();
-    // createSomeDefaultField() // For testing purpose
     initClickListener();
     showBoard(newStartingBoard(10));
     // Your game can start here, but define separate functions, don't write everything in here :)
