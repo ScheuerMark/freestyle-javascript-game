@@ -16,6 +16,7 @@ function checkIfFieldValid(field,fields){
         fieldValues.col.filter(item => item === field.innerText && item !== "").length > 1){console.log("asd");field.classList.add("wrong");return false};
     if(fieldValues.block.filter(item => item === field.innerText && item !== "").length > 1){field.classList.add("wrong");return false};
     if(fieldValues.row.includes("") || fieldValues.col.includes("")){return false};
+
     return true;
 
 }

@@ -76,6 +76,8 @@ h1{
     color: black;
     background-color: whitesmoke;
 }
+
 .field.wrong {
     background-color: lightcoral !important;
 }
+
