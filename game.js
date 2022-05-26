@@ -134,12 +134,39 @@ function showWinMessage () {
     winH1.classList.add('bring-to-front');
     document.getElementsByTagName('body')[0].appendChild(winH1);
 }
+function setDifficulty() {
+    const difficulty = document.querySelectorAll("input[name='difficulty']");
+    for (const level of difficulty) {
+        level.addEventListener('click', function (){
+        console.log("hello2");
+        if (this.checked) {
+            console.log("hello3");
+            holes = parseInt(this.dataset.hole);
+            console.log(holes);
+            }
+        });
+        console.log("hello1");
+    }
+}
+
 
 function initGame() {
     createBoard();
     createInput();
     initClickListener();
-    showBoard(newStartingBoard(10));
-    // Your game can start here, but define separate functions, don't write everything in here :)
-
+ //   const difficultyModal = new bootstrap.Modal(document.getElementById("difficultyModal"));
+  //  console.log(difficultyModal);
+   // difficultyModal.show(difficultyModal);
+    holes = 64;
+    setDifficulty();
+    const startGame = document.getElementById("control1");
+    startGame.addEventListener('click', () =>{
+        currentGame = newStartingBoard(holes);
+        showBoard(currentGame);
+    })
+    const resetGame = document.getElementById("control2");
+    resetGame.addEventListener('click', () => {
+        showBoard(currentGame);
+    })
 }
+

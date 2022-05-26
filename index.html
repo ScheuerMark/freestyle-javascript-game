@@ -3,16 +3,76 @@
 <head>
     <title>Javascript Game</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
     <link rel="stylesheet" href='./game.css'>
     <script src="./generator.js" defer></script>
     <script src="./winchecker.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="./game.js" defer></script>
 </head>
 <body>
-<h1>Sudoku</h1>
-    <div class="game-field"></div>
-    <div class="input-numbers"></div>
+<div class="modal fade" id="difficultyModal" tabindex="-1" aria-labelledby="setDifficultyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Choose difficulty level</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="btn-group" role="group">
+                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" data-hole="64" checked data-bs-dismiss="modal">
+                <label class="btn btn-primary" for="option1">Easy</label>
+                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" data-hole="69" data-bs-dismiss="modal">
+                <label class="btn btn-primary" for="option2">Medium</label>
+                <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" data-hole="74" data-bs-dismiss="modal">
+                <label class="btn btn-primary" for="option3">Hard</label>
+                    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5">
+    <div class="align-middle"><h1 >Sudoku</h1></div>
+
+</div>
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-sm-2 column">
+            <div class="card text-center justify-content-center" style="width: 18rem">
+                <div class="card-body">
+                    <h3 class="card-title text-align-center">Select difficulty level</h3>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="difficulty" id="difficulty1" autocomplete="off" checked data-hole="64">
+                      <label class="btn btn-secondary" for="difficulty1">Easy</label>
+                <input type="radio" class="btn-check" name="difficulty" id="difficulty2" autocomplete="off" data-hole="69">
+                      <label class="btn btn-secondary" for="difficulty2">Medium</label>
+                <input type="radio" class="btn-check" name="difficulty" id="difficulty3" autocomplete="off" data-hole="74">
+                      <label class="btn btn-secondary" for="difficulty3">Hard</label>
+                    </div>
+                </div>
+            </div>
+             <div class="card text-center " style="width: 18rem">
+                <div class="card-body justify-content-center">
+                    <h3 class="card-title text-align-center">Game control</h3>
+                <p>
+                    <input type="radio" class="btn-check" name="control" id="control1" autocomplete="off">
+                    <label class="btn btn-secondary" for="control1">Start game</label></p>
+                <p><input type="radio" class="btn-check" name="control" id="control2" autocomplete="off">
+                <label class="btn btn-secondary" for="control2">Reset game</label></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 column">
+            <div class="game-field"></div>
+            <div class="input-numbers"></div>
+        </div>
+        <div class="col-sm-2 column">Jobb</div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
