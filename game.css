@@ -93,3 +93,7 @@ h1{
     padding: 50px;
     border: solid rgba(0,0,0,0.4) 1px;
 }
+
+#minutes, #seconds, #colon {
+    font-size: 3em;
+}

@@ -148,6 +148,19 @@ function setDifficulty() {
         console.log("hello1");
     }
 }
+function startTimer(){
+    if(typeof interval !== "undefined") {
+        clearInterval(interval);
+    }
+    var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    interval = setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
+
+
+}
 
 
 function initGame() {
@@ -165,6 +178,7 @@ function initGame() {
         if (winMessagePresent.length) {
             winMessagePresent[0].remove();
         }
+        startTimer();
         currentGame = newStartingBoard(holes);
         showBoard(currentGame);
     })
