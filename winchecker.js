@@ -1,19 +1,22 @@
 function checkIfAllFieldValid(){
-    let fields = Array.from(document.getElementsByClassName("field"));
+    let fields = document.getElementsByClassName("field");
     console.log("check");
     //fields.forEach(field => {if(!checkIfFieldValid(field,fields)){return false;}});
-    for (let field of fields){
-        if(!checkIfFieldValid(field,fields)){return false;}
+    let valid = false;
+    for (const field of fields){
+        if(!checkIfFieldValid(field,fields)){valid = false;}
     }
-    return true;
+    return valid;
 }
 
 function checkIfFieldValid(field,fields){
     let fieldValues = getRelatedFieldValues(field,fields);
-
+    field.classList.remove("wrong")
+    if(fieldValues.row.filter(item => item === field.innerHTML && item !== "").length > 1 ||
+        fieldValues.col.filter(item => item === field.innerText && item !== "").length > 1){console.log("asd");field.classList.add("wrong");return false};
+    if(fieldValues.block.filter(item => item === field.innerText && item !== "").length > 1){field.classList.add("wrong");return false};
     if(fieldValues.row.includes("") || fieldValues.col.includes("")){return false};
-    if(new Set(fieldValues.row).size !== fieldValues.row.length || new Set(fieldValues.col).size !== fieldValues.col.length){return false};
-    return (new Set(fieldValues.block).size === fieldValues.block.length);
+    return true;
 
 }
 
