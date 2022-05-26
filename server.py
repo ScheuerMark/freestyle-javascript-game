@@ -9,7 +9,6 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def main():
     scores = data_manager.list_scores()
-    print(scores)
     if request.method == 'POST':
         request_form_new_score = dict(request.form)
         data_manager.add_user(request_form_new_score)
@@ -18,6 +17,13 @@ def main():
         return render_template("index.html", scores=scores)
 
 
+"""
+@app.route('/postmethod', methods=['POST'])
+def get_post_javascript_data():
+    data = request.form['Foo']
+    print(data)
+    return redirect('/');
+"""
 
 if __name__ == "__main__":
     app.run(

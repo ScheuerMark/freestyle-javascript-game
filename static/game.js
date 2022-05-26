@@ -1,3 +1,11 @@
+/*data = new FormData();
+data.set('Foo',1);
+data.set('Bar','boo');
+
+let request = new XMLHttpRequest();
+request.open("POST", '/postmethod', true);
+request.send(data);
+*/
 initGame();
 
 function createBoard(width=9) {
