@@ -48,11 +48,12 @@ h1{
 
 .number-field.selected-number {
     background-color: rgba(53, 53, 229, 0.2);
+
 }
 
 .field.highlight {
     background-color: rgba(53, 53, 229, 0.2) !important;
-    padding: 5px;
+    font-size: 4em;
 }
 
 .light-highlight{
