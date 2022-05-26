@@ -91,10 +91,14 @@ function removeTextContent (event) {
 
 function keyboardInput (event) {
     const highlightedField = document.getElementsByClassName('highlight');
+    const defaultFields = getDefaultFieldsEditable();
     if (highlightedField.length) {
+        console.log(event.code);
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             highlightedField[0].textContent = event.key;
             console.log(checkIfAllFieldValid());
+        } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace'].includes(event.code)) {
+           highlightedField[0].textContent = '';
         } else {
             highlightedField[0].classList.remove('highlight');
         }
