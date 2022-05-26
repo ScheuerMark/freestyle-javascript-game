@@ -54,12 +54,12 @@ h1{
 }
 
 .field.highlight {
-    background-color: rgba(53, 53, 229, 0.2);
+    background-color: rgba(53, 53, 229, 0.2) !important;
     padding: 5px;
 }
 
 .light-highlight{
-    background-color: rgba(245,245,245,0.5);
+    background-color: rgba(238,232,170,0.4) !important;
 }
 
 .field:nth-child(9n-3), .field:nth-child(9n-6){
@@ -80,3 +80,4 @@ h1{
     color: black;
     background-color: whitesmoke;
 }
+

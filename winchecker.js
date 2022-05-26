@@ -10,10 +10,10 @@ function checkIfAllFieldValid(){
 
 function checkIfFieldValid(field,fields){
     let fieldValues = getRelatedFieldValues(field,fields);
-
     if(fieldValues.row.includes("") || fieldValues.col.includes("")){return false};
     if(new Set(fieldValues.row).size !== fieldValues.row.length || new Set(fieldValues.col).size !== fieldValues.col.length){return false};
-    return (new Set(fieldValues.block).size === fieldValues.block.length);
+    if(new Set(fieldValues.block).size !== fieldValues.block.length){return false};
+    return true;
 
 }
 
