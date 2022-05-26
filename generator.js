@@ -236,6 +236,7 @@ function emptyCellCoords (startingBoard) {
 function showBoard(startingBoard){
     let fieldsToFill = document.getElementsByClassName("field");
     for (let i=0; i<fieldsToFill.length; i++){
+        fieldsToFill[i].classList.remove("default-field");
         fieldsToFill[i].innerHTML = startingBoard[1].flat()[i];
         if (fieldsToFill[i].innerHTML === "0"){
             fieldsToFill[i].innerHTML = "";
