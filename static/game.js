@@ -97,17 +97,54 @@ function removeTextContent (event) {
     }
 }
 
+function moveHighlightedField(direction){ // l,u,r,d
+    let fields = document.getElementsByClassName('field');
+    const highlightedField = document.getElementsByClassName('highlight')[0];
+    let fieldIndex =Array.from(fields).indexOf(highlightedField);
+    let change = false;
+    if(direction==='r' && highlightedField.nextSibling) {highlightedField.nextSibling.classList.add('highlight');change=true}
+    else if(direction==='l' && highlightedField.previousSibling){highlightedField.previousSibling.classList.add('highlight');change=true}
+    else if(direction==='u' && fields[fieldIndex-9]){fields[fieldIndex-9].classList.add('highlight');change=true}
+    else if(direction==='d' && fields[fieldIndex+9]){fields[fieldIndex+9].classList.add('highlight');change=true}
+
+    if(change){highlightedField.classList.remove('highlight');}
+}
+
+function checkIfDefault(field){
+    const defaultFields = getDefaultFieldsEditable();
+    if(defaultFields.includes(field)){return true;}
+    else {return false;}
+}
+
 function keyboardInput (event) {
     const highlightedField = document.getElementsByClassName('highlight');
     const defaultFields = getDefaultFieldsEditable();
     if (highlightedField.length) {
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-            highlightedField[0].textContent = event.key;
-            console.log(checkIfAllFieldValid());
-        } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace'].includes(event.code)) {
+            if(!checkIfDefault(highlightedField[0])) {
+                highlightedField[0].textContent = event.key;
+                }
+                console.log(checkIfAllFieldValid());
+
+        } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace','NumpadDecimal','Delete'].includes(event.code)) {
            highlightedField[0].textContent = '';
            checkIfAllFieldValid();
-        } else {
+        } else if([37,38,39,40].includes(event.keyCode)){
+            switch (event.keyCode) {
+                 case 37:
+                    moveHighlightedField('l');//left
+                    break;
+                 case 38:
+                    moveHighlightedField('u');//up
+                    break;
+                 case 39:
+                    moveHighlightedField('r');//right
+                    break;
+                 case 40:
+                    moveHighlightedField('d');//down
+                    break;
+      }
+        }else {
             highlightedField[0].classList.remove('highlight');
         }
     }
@@ -222,7 +259,7 @@ function initGame() {
 
   //  console.log(difficultyModal);
 
-    holes = 64;
+    holes = 45;
     setDifficulty();
     const startGame = document.getElementById("control1");
     const startGameLabel = document.getElementById("control11")
