@@ -1,6 +1,9 @@
 function checkIfAllFieldValid(){
-    let fields = document.getElementsByClassName("field");
-    console.log("check");
+    let fields = Array.from(document.getElementsByClassName("field"));
+    console.dir(fields);
+    for (let field of fields){
+        console.dir(field);
+    }
     //fields.forEach(field => {if(!checkIfFieldValid(field,fields)){return false;}});
     let valid = true;
     for (const field of fields){
@@ -29,6 +32,7 @@ function checkIfFieldValid(field,fields){
 
 function getRelatedFieldValues(field,fields){
     let relatedFields = getRelatedFields(field,fields);
+    //for (let key in relatedFields)
     relatedFields.row = Array.from(relatedFields.row).map(item => item.innerHTML);
     relatedFields.col = Array.from(relatedFields.col).map(item => item.innerHTML);
     relatedFields.block = Array.from(relatedFields.block).map(item => item.innerHTML);
@@ -57,7 +61,7 @@ function getColl(field,fields,collIndex,width=9){
 function getBlock(field,fields,rowIndex,collIndex, width=9){
     let boxRowIndex = Math.floor(rowIndex / Math.sqrt(width));
     let boxCollIndex = Math.floor(collIndex / Math.sqrt(width));
-
+    let selector = "";
     return document.querySelectorAll(`
                         .field:nth-child(9n+${(boxCollIndex*3+1)+(boxRowIndex*27)}):nth-child(-n+${(boxRowIndex+1)*27}),
                         .field:nth-child(9n+${boxCollIndex*3+2+(boxRowIndex*27)}):nth-child(-n+${(boxRowIndex+1)*27}),
