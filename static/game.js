@@ -26,7 +26,8 @@ function selectInput() {
         that = this;
         that.classList.toggle('selected-number');
     } else {
-        that.textContent = this.textContent;
+        if(!checkIfDefault(highlightedField[0])){highlightedField[0].textContent = this.textContent;}
+
         console.log(checkIfAllFieldValid());
     }
 }
@@ -73,10 +74,11 @@ function waitForInput() {
                 this.classList.add('highlight');
                 that = this
             } else {
-                if (that === this) {
+                if (highlightedField[0] === this) {
+                    console.log("asd");
                     this.classList.remove('highlight');
                 } else {
-                    that.classList.remove('highlight');
+                    highlightedField[0].classList.remove('highlight');
                     this.classList.add('highlight');
                     that = this;
                 }
@@ -126,7 +128,7 @@ function keyboardInput (event) {
                 }
                 console.log(checkIfAllFieldValid());
 
-        } else if (!defaultFields.includes(highlightedField[0]) && ['Escape', 'Backspace','NumpadDecimal','Delete'].includes(event.code)) {
+        } else if (!defaultFields.includes(highlightedField[0]) && ['Backspace','NumpadDecimal','Delete'].includes(event.code)) {
            highlightedField[0].textContent = '';
            checkIfAllFieldValid();
         } else if([37,38,39,40].includes(event.keyCode)){
@@ -144,7 +146,7 @@ function keyboardInput (event) {
                     moveHighlightedField('d');//down
                     break;
       }
-        }else {
+        }else if (['Escape'].includes(event.code)) {
             highlightedField[0].classList.remove('highlight');
         }
     }
